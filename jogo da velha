@@ -1,0 +1,151 @@
+# #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main() {
+	char j1, j2;
+	char tb[3][3] = { ' ' };
+	int i, j,c;
+	int jogadas = 0;
+	int vez = 0;
+	int fim = 3; //se fim=1 jogador 1 ganha   se fim=2 jogador 2 ganha   se fim=3 draw
+		
+	do{
+		printf(" %c  |  %c  |  %c \n", tb[0][0], tb[0][1], tb[0][2]);
+		printf("----------------\n");
+		printf("  %c |  %c  |  %c \n", tb[1][0], tb[1][1], tb[1][2]);
+		printf("----------------\n");
+		printf("  %c |  %c  |  %c \n", tb[2][0], tb[2][1], tb[2][2]);
+
+		
+		do {
+			if (jogadas % 2 == 0) {
+				printf("vez jogador 1 \n");
+			}
+			else {
+				printf("vez jogador 2 \n");
+			}
+			printf("Digite linha: ");
+			scanf_s("%d", &i);
+			i--;
+
+			printf("digite a coluna: ");
+			scanf_s("%d", &j);
+			j--;
+			if (i > 3) {
+				printf("linha invalida \n");
+			}
+			if (j > 3) {
+				printf("coluna invalida \n");
+			}
+		} while (i > 3 || j > 3);
+
+		if ((jogadas % 2) == 0) {
+			tb[i][j] = 'x';
+		}
+		else {
+			tb[i][j] = 'o'; 
+		} 
+		jogadas++;
+		int v,venx,veno;
+		for (c = 0; c < 3; c++) {
+			venx = 0;
+			veno = 0;
+			for (v = 0; v < 3; v++) {
+				if (tb[c][v] == 'x') {
+					venx++;
+				}
+				else if (tb[c][v] == 'o') {
+					veno++;
+				}
+				
+			}
+			if (venx == 3) {
+				fim = 1;
+				jogadas = 40;
+				break;
+			}
+			if (veno == 3) {
+				fim = 2;
+				jogadas = 40;
+				break;
+			}
+		}
+		for (c = 0; c < 3; c++) {
+			venx = 0;
+			veno = 0;
+			for (v = 0; v < 3; v++) {
+				if (tb[v][c] == 'x') {
+					venx++;
+				}
+				else if (tb[v][c] == 'o') {
+					veno++;
+				}
+
+			}
+			if (venx == 3) {
+				fim = 1;
+				jogadas = 40;
+				break;
+			}
+			if (veno == 3) {
+				fim = 2;
+				jogadas = 40;
+				break;
+			}
+		}
+		venx = 0;
+		veno = 0;
+		for (c = 0; c < 3; c++) {
+			if (tb[c][c] == 'x') {
+				venx++;
+			}
+			else if (tb[c][c] == 'o') {
+				veno++;
+			}
+		}
+		if (venx == 3) {
+			fim = 1;
+			jogadas = 40;
+			break;
+		}
+		if (veno == 3) {
+			fim = 2;
+			jogadas = 40;
+			break;
+		}
+		venx = 0;
+		veno = 0;
+		for (c = 0; c < 3; c++) {
+			if (tb[2 - c][c] == 'x') {
+				venx++;
+			}
+			else if (tb[2 - c][c] == 'o') {
+				veno++;
+			}
+		}
+		if (venx == 3) {
+			fim = 1;
+			jogadas = 40;
+			break;
+		}
+		if (veno == 3) {
+			fim = 2;
+			jogadas = 40;
+			break;
+		}
+		system("cls");
+	} while (jogadas <= 9);
+	if (fim == 1) {
+		puts("jogador 1");
+	}
+	else if (fim == 2) {
+		puts("jogador 2");
+	}
+	else {
+		puts("draw");
+	}
+
+	system("pause");
+	return 0;
+}
